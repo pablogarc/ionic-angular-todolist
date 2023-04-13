@@ -1,20 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title class="header-title"> To Do List </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="container">
+    <div class="container-form">
+      <ion-input
+        class="input-add-task"
+        [(ngModel)]="newTask"
+        type="text"
+        label="Create a task"
+        label-placement="floating"
+        fill="solid"
+        placeholder="Enter new task"
+      ></ion-input>
+      <div class="button-add-task">
+        <ion-button size="small" shape="round" (click)="addTask(newTask)">
+          Add task
+        </ion-button>
+      </div>
+    </div>
+    <div class="container-list">
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let item of todoListArray">
+          <ion-label>{{ item.task }}</ion-label>
+          <ion-button (click)="openModal(item.id)">
+            <ion-icon slot="icon-only" name="pencil"></ion-icon>
+          </ion-button>
+          <ion-button (click)="removeTask(item.id)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 </ion-content>
